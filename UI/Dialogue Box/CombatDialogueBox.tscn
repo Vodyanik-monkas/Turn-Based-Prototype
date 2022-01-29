@@ -40,38 +40,37 @@ margin_right = 683.0
 margin_bottom = 172.0
 
 [node name="PlayerOptions" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-margin_right = 99.0
+margin_right = 80.0
 margin_bottom = 172.0
 rect_min_size = Vector2( 80, 0 )
 size_flags_vertical = 3
 
 [node name="CombatMenu" type="VBoxContainer" parent="MarginContainer/HBoxContainer/PlayerOptions"]
-margin_right = 99.0
+margin_right = 80.0
 margin_bottom = 172.0
 
 [node name="AttackButton" type="Button" parent="MarginContainer/HBoxContainer/PlayerOptions/CombatMenu"]
-margin_top = 10.0
-margin_right = 99.0
+margin_right = 80.0
 margin_bottom = 54.0
-size_flags_vertical = 10
+size_flags_vertical = 3
 text = "Attack"
 
 [node name="DefendButton" type="Button" parent="MarginContainer/HBoxContainer/PlayerOptions/CombatMenu"]
-margin_top = 69.0
-margin_right = 99.0
+margin_top = 58.0
+margin_right = 80.0
 margin_bottom = 113.0
-size_flags_vertical = 10
+size_flags_vertical = 11
 text = "Defend"
 
 [node name="RunButton" type="Button" parent="MarginContainer/HBoxContainer/PlayerOptions/CombatMenu"]
-margin_top = 128.0
-margin_right = 99.0
+margin_top = 117.0
+margin_right = 80.0
 margin_bottom = 172.0
-size_flags_vertical = 10
+size_flags_vertical = 11
 text = "Run"
 
 [node name="InfoBox" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-margin_left = 103.0
+margin_left = 84.0
 margin_right = 683.0
 margin_bottom = 172.0
 rect_min_size = Vector2( 150, 0 )
@@ -85,7 +84,7 @@ custom_constants/margin_bottom = 10
 [node name="InfoText" type="RichTextLabel" parent="MarginContainer/HBoxContainer/InfoBox"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 570.0
+margin_right = 589.0
 margin_bottom = 162.0
 text = "Attack-u Desu!"
 [connection signal="focus_entered" from="MarginContainer/HBoxContainer/PlayerOptions/CombatMenu/AttackButton" to="." method="_on_AttackButton_focus_entered"]
