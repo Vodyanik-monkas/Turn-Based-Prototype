@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Actors/Actor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Adventurer/Adventurer-1.5/Individual Sprites/adventurer-idle-2-00.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Adventurer/Adventurer-1.5/Individual Sprites/adventurer-idle-2-03.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Adventurer/Adventurer-1.5/Individual Sprites/adventurer-idle-2-01.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Adventurer/Adventurer-1.5/Individual Sprites/adventurer-idle-2-02.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UI/CharacterPortraits/NoblePortrait.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "idle",
+"speed": 7.0
+} ]
+
+[node name="Noble" instance=ExtResource( 1 )]
+frames = SubResource( 1 )
+portrait = ExtResource( 6 )

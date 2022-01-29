@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Actors/Actor.gd" type="Script" id=3]
+[ext_resource path="res://Actors/Skills.gd" type="Script" id=4]
+[ext_resource path="res://Actors/Stats.gd" type="Script" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "idle",
+"speed": 8.0
+} ]
+
+[node name="Actor" type="AnimatedSprite"]
+frames = SubResource( 1 )
+animation = "idle"
+script = ExtResource( 3 )
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="Skills" type="Node" parent="."]
+script = ExtResource( 4 )
+[connection signal="animation_finished" from="." to="." method="_on_Actor_animation_finished"]

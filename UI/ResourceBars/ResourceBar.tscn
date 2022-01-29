@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Default_Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/TreeRoot-ZVgOl.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://UI/ResourceBars/ResourceBar.gd" type="Script" id=3]
+[ext_resource path="res://Assets/UI/ResourceBars/HealthBarOver.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/ResourceBars/HealthBarUnder.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 22
+font_data = ExtResource( 2 )
+
+[node name="ResourceBar" type="HBoxContainer"]
+margin_right = 414.0
+margin_bottom = 38.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 110.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 110, 32 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+color = Color( 0.0196078, 0.239216, 0.121569, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_right = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amount" type="Label" parent="ColorRect/MarginContainer"]
+margin_top = 6.0
+margin_right = 100.0
+margin_bottom = 32.0
+size_flags_horizontal = 9
+custom_fonts/font = SubResource( 1 )
+text = "20"
+align = 2
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resource" type="Label" parent="ColorRect/MarginContainer"]
+margin_right = 42.0
+margin_bottom = 38.0
+size_flags_horizontal = 0
+text = "HP"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="TextureProgress" parent="."]
+margin_left = 114.0
+margin_right = 414.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+max_value = 20.0
+value = 20.0
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
+nine_patch_stretch = true
