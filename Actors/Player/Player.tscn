@@ -11,7 +11,7 @@ script = ExtResource( 4 )
 [node name="Party" type="YSort" parent="."]
 
 [node name="Noble" parent="Party" instance=ExtResource( 1 )]
-position = Vector2( 300, 200 )
+position = Vector2( 300, 199.405 )
 scale = Vector2( 3, 3 )
 
 [node name="Thief" parent="Party" instance=ExtResource( 3 )]
@@ -19,7 +19,7 @@ position = Vector2( 250, 100 )
 scale = Vector2( 1.5, 1.5 )
 
 [node name="Wizard" parent="Party" instance=ExtResource( 2 )]
-position = Vector2( 200, 300 )
+position = Vector2( 194.649, 269.973 )
 
 [node name="Stock" type="YSort" parent="."]
 visible = false

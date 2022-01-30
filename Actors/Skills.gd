@@ -1,6 +1,6 @@
 extends Node
 
-var options_menu = ["fight", "defend", "item", "switch", "run", "pass"]
+var option_list = ["fight", "defend", "item", "switch", "run", "pass"]
 
 var skills = {
 	attack = {
@@ -15,3 +15,9 @@ var skills = {
 		"mana_cost": 8
 	}
 }
+
+func get_option_menu():
+	return option_list
+
+func get_skills():
+	return skills

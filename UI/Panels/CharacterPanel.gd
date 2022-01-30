@@ -21,3 +21,4 @@ func set_portrait(character_portrait):
 	if character_portrait:
 		portrait = character_portrait
 	$MarginContainer2/HBoxContainer/PortraitContainer/Portrait.texture = portrait
+

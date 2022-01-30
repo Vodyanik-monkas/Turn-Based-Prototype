@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Default_Theme.tres" type="Theme" id=1]
 [ext_resource path="res://Assets/UI/smallPanel.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Assets/fonts/Geronideregulardemo-AL5n7.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://UI/Buttons/Action.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/Dialogue Box/OptionMenu.gd" type="Script" id=6]
+[ext_resource path="res://UI/Dialogue Box/NewCombatDialogueBox.gd" type="Script" id=7]
+[ext_resource path="res://UI/Dialogue Box/ToolTip.gd" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 14
@@ -17,10 +19,17 @@ font_data = ExtResource( 4 )
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
 
+[sub_resource type="DynamicFont" id=3]
+size = 15
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
 [node name="NewCombatDialogueBox" type="HBoxContainer"]
 margin_right = 640.0
 margin_bottom = 275.0
 theme = ExtResource( 1 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -75,10 +84,29 @@ size_flags_horizontal = 3
 size_flags_vertical = 8
 texture = ExtResource( 2 )
 expand = true
+script = ExtResource( 8 )
 
-[node name="Label" type="Label" parent="ToolTip"]
-margin_right = 40.0
-margin_bottom = 38.0
+[node name="MarginContainer" type="MarginContainer" parent="ToolTip"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 18
+custom_constants/margin_top = 11
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 19
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="RichTextLabel" parent="ToolTip/MarginContainer"]
+margin_left = 20.0
+margin_top = 11.0
+margin_right = 368.0
+margin_bottom = 56.0
+custom_fonts/normal_font = SubResource( 3 )
+custom_colors/default_color = Color( 0.439216, 0.321569, 0.25098, 1 )
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="update_tooltip" from="ToolTipBox/MarginContainer/OptionMenu" to="." method="_on_OptionMenu_update_tooltip"]
