@@ -1,6 +1,7 @@
 extends HBoxContainer
 
-signal update_tooltip
+signal active_option
+signal set_tooltip
 
 export(PackedScene) var option_buttons
 
@@ -14,32 +15,17 @@ var col_count = 2
 
 func initialize_option_menu(character_options):
 	options = character_options
+	col_count = get_child_count()
 	
-	# Populates instances from option list
-	# and sets an active option
+	if options.size() == 0:
+		options = ["NULL"]
+	
 	draw_options()
-	get_option().active()
-
-func _unhandled_input(_event):
-	
-	# Moves the cursor to highlight selected option
-	if Input.is_action_just_pressed("ui_up"):
-		move_cursor(0, -1)
-	if Input.is_action_just_pressed("ui_down"):
-		move_cursor(0, 1)
-	if Input.is_action_just_pressed("ui_left"):
-		move_cursor(-1, 0)
-	if Input.is_action_just_pressed("ui_right"):
-		move_cursor(1, 0)
-	
-	# Communicate about selected option
-	if Input.is_action_just_pressed("ui_accept"):
-		select_option()
-
+	get_selected_option().set_cursor_active()
 
 # Changes which option is focused on
 func move_cursor(direction_x, direction_y):
-	get_option().inactive()
+	get_selected_option().set_cursor_inactive()
 	
 	cursor_position_x += direction_x
 	cursor_position_y += direction_y
@@ -48,33 +34,36 @@ func move_cursor(direction_x, direction_y):
 	cursor_position_x = clamp(cursor_position_x, 0, col_count - 1)
 	cursor_position_y = clamp(cursor_position_y, 0, get_options_in_column())
 	
-	emit_signal("update_tooltip", get_index())
+	emit_signal("active_option", get_selected_option().id)
+	emit_signal("set_tooltip", get_action_tooltip())
 	
-	get_option().active()
+	get_selected_option().set_cursor_active()
 
 # Instances options and places them
 func draw_options():
-	for index in range(0, options.size()):
+	reset_cursor_position()
+	var index = 0
+	for option in options:
 		var action = option_buttons.instance()
-		action.namaewa = options[index]["id"]
+		action.id = option
 		
-		if index % col_count == 0:
-			$Column1.add_child(action)
-		else:
-			$Column2.add_child(action)
+		get_child(index % col_count).add_child(action)
+		
+		index += 1
 	
-	emit_signal("update_tooltip", get_index())
+	emit_signal("active_option", get_selected_option().id)
 
 # Gets option cursor is currently on
-func get_option():
+func get_selected_option():
 	return get_child(cursor_position_x).get_child(cursor_position_y)
 
 # Returns the number of rows in current cursors column
 func get_options_in_column():
 	return get_child(cursor_position_x).get_child_count() - 1
 
-func select_option():
-	pass
+func reset_cursor_position():
+	cursor_position_x = 0
+	cursor_position_y = 0
 
-func get_index():
-	return cursor_position_x + cursor_position_y * 2
+func get_action_tooltip():
+	return options[get_selected_option().id]["tooltip"]

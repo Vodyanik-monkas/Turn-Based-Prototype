@@ -31,6 +31,9 @@ func change_health(health):
 func get_skillset():
 	return $Skills
 
+func get_stats():
+	return $Stats
+
 func _on_Actor_animation_finished():
 	animation = "idle"
 

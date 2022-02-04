@@ -1,16 +1,16 @@
 extends HBoxContainer
 
-var namaewa = "name"
+var id = "name"
 var active = false
 
 func _ready():
-	$Label.text = namaewa
+	$Label.text = id
 
-func active():
+func set_cursor_active():
 	active = true
 	$Selected.show()
 
-func inactive():
+func set_cursor_inactive():
 	active = false
 	$Selected.hide()
 

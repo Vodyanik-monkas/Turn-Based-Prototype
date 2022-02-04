@@ -109,4 +109,5 @@ scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="update_tooltip" from="ToolTipBox/MarginContainer/OptionMenu" to="." method="_on_OptionMenu_update_tooltip"]
+[connection signal="active_option" from="ToolTipBox/MarginContainer/OptionMenu" to="." method="_on_OptionMenu_active_option"]
+[connection signal="set_tooltip" from="ToolTipBox/MarginContainer/OptionMenu" to="." method="set_tooltip"]
