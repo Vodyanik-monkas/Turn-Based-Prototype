@@ -2,12 +2,15 @@ extends Node
 
 var option_list = {
 	attack = {
+		"next_state": "ToggleSkills",
 		"tooltip": "A basic physical attack. MP:3"
 	}, 
 	defend = {
+		"next_state": "TargetSelect",
 		"tooltip": "This option is brought to you by a rock."
 	},
 	piss = {
+		"next_state": "TargetSelect",
 		"tooltip": "Only a natural response when considering getting your guts spilled across the pavement. MP: 100%"
 	}
 }

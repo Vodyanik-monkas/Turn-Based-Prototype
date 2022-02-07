@@ -8,14 +8,13 @@ var turn = 0
 func _ready():
 	emit_signal("new_turn", turn)
 
-func set_character_health(character_index, current_health, max_health):
-	pass
-
-func set_character_mana(character_index, current_mana, max_mana):
-	pass
-
-func set_character_portrait(character_index):
-	pass
+func set_character_panel(index: int, stats: Node, portrait: Texture):
+	var panel = get_character_panel(index)
+	
+	panel.set_health(stats.current_health, stats.max_health)
+	panel.set_mana(stats.current_mana, stats.max_mana)
+	panel.set_portrait(portrait)
+	panel.show()
 
 func initialize_combat_dialogue_box(options_list):
 	$MarginContainer/VBoxContainer/CombatDialogueBox.initialize_combat_dialogue_box(options_list)
@@ -28,3 +27,6 @@ func _on_CombatDialogueBox_set_active_option(id):
 
 func _on_PlayerChoice_option_selected():
 	pass # Replace with function body.
+
+func get_character_panel(character_index) -> Node:
+	return $MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/VBoxContainer.get_child(character_index)

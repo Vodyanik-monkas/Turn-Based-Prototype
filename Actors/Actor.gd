@@ -28,10 +28,10 @@ func change_health(health):
 	
 	emit_signal("set_health", $Stats.current_health, $Stats.maximum_health)
 
-func get_skillset():
+func get_skillset() -> Node:
 	return $Skills
 
-func get_stats():
+func get_stats() -> Node:
 	return $Stats
 
 func _on_Actor_animation_finished():

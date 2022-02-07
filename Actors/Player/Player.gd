@@ -2,19 +2,19 @@ extends Node
 
 var active_character: Object
 
+var party_size: int = 1
+
 func _ready():
 	set_party_positions()
+	
 	active_character = $Party.get_child(0)
+	party_size = $Party.get_child_count()
 
-func get_character_info():
-	return active_character.get_skillset()
-
-func set_new_active_character(next_character):
+func set_new_active_character(next_character) -> void:
 	active_character = $Party.get_child(next_character)
 
 # Sets physical positions of party members on game scene
-func set_party_positions():
-	# Setting a few usable variables
+func set_party_positions() -> void:
 	var character_spacing_x = 150 / get_party_size()
 	var character_spacing_y = 200
 	var base_y = 100
@@ -29,15 +29,17 @@ func set_party_positions():
 		else:
 			$Party.get_child(party_position).position.y = base_y + character_spacing_y * (party_position - 1)
 
-# Return character skillset
-func get_skillset():
+func get_skillset() -> Node:
 	return active_character.get_skillset()
 
-func get_health_and_mana(character_index):
+func get_stats(character_index) -> Node:
 	return $Party.get_child(character_index).get_stats()
 
-func get_party_size():
+func get_party_size() -> int:
 	return $Party.get_child_count()
 
-func change_health(amount):
+func get_character_portrait(character_index) -> Texture:
+	return $Party.get_child(character_index).portrait
+
+func change_health(amount) -> void:
 	active_character.change_health(amount)
