@@ -5,6 +5,8 @@ signal set_health
 
 export(Texture) var portrait
 
+var party_position: int
+
 func _ready():
 	playing = true
 	emit_signal("set_mana", $Stats.current_mana, $Stats.max_mana)

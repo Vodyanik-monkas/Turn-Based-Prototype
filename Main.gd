@@ -3,13 +3,11 @@ extends Node
 func _ready():
 	for i in range(0, $Player.party_size):
 		var s = $Player.get_stats(i)
-		$HUD.set_character_panel(i, s, $Player.get_character_portrait(i))
+		var p = $Player.get_character_portrait(i)
+		
+		$HUD.set_character_panel(i, s, p)
 
 func _on_HUD_new_turn(turn):
-	var character_index = turn % $Player.get_party_size()
-	
-	$Player.set_new_active_character(character_index)
-	
 	$HUD.initialize_combat_dialogue_box($Player.get_skillset().option_list)
 
 func update_combat_dialogue_box(is_skills_showing: bool):
