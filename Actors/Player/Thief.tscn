@@ -24,3 +24,7 @@ animations = [ {
 position = Vector2( 10, -10 )
 frames = SubResource( 1 )
 portrait = ExtResource( 11 )
+
+[node name="Shadow" parent="." index="2"]
+position = Vector2( -11.75, 25.4528 )
+scale = Vector2( 0.609375, 0.150335 )

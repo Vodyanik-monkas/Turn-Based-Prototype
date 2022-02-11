@@ -6,6 +6,8 @@ func _ready():
 		var p = $Player.get_character_portrait(i)
 		
 		$HUD.set_character_panel(i, s, p)
+	
+	$HUD.initialize_combat_dialogue_box($Player.get_skillset().option_list)
 
 func _on_HUD_new_turn(turn):
 	$HUD.initialize_combat_dialogue_box($Player.get_skillset().option_list)

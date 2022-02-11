@@ -10,4 +10,5 @@ script = ExtResource( 3 )
 [node name="HUD" parent="." instance=ExtResource( 1 )]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+base = Vector2( 400, 250 )
 [connection signal="new_turn" from="HUD" to="." method="_on_HUD_new_turn"]

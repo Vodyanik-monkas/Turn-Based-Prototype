@@ -18,3 +18,7 @@ animations = [ {
 [node name="Noble" instance=ExtResource( 1 )]
 frames = SubResource( 1 )
 portrait = ExtResource( 6 )
+
+[node name="Shadow" parent="." index="2"]
+position = Vector2( -0.556793, 14.143 )
+scale = Vector2( 0.547591, 0.192624 )

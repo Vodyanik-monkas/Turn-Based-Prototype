@@ -11,6 +11,8 @@ func _ready():
 	set_party_positions()
 	
 	active_character = $Party.get_child(0)
+	print("ready Function")
+	print(active_character)
 	party_size = $Party.get_child_count()
 
 func next_character() -> void:

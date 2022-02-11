@@ -12,5 +12,5 @@ func _on_OptionMenu_active_option(id):
 
 	emit_signal("set_active_option", id)
 
-func set_tooltip(tooltip):
+func _on_OptionMenu_set_tooltip(tooltip):
 	$ToolTip.set_tooltip(tooltip)

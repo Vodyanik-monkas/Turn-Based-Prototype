@@ -5,9 +5,6 @@ signal new_turn
 var active_option = "empty"
 var turn = 0
 
-func _ready():
-	emit_signal("new_turn", turn)
-
 func set_character_panel(index: int, stats: Node, portrait: Texture):
 	var panel = get_character_panel(index)
 	

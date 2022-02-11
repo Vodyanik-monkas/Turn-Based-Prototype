@@ -17,14 +17,15 @@ func initialize_option_menu(character_options):
 	options = character_options
 	col_count = get_child_count()
 	
-	if options.size() == 0:
-		options = ["NULL"]
-	
 	draw_options()
 	get_selected_option().set_cursor_active()
+	emit_signal("set_tooltip", get_action_tooltip())
 
 # Changes which option is focused on
 func move_cursor(direction_x, direction_y):
+	if options.size() == 0:
+		return 1
+	
 	get_selected_option().set_cursor_inactive()
 	
 	cursor_position_x += direction_x
@@ -42,6 +43,7 @@ func move_cursor(direction_x, direction_y):
 # Instances options and places them
 func draw_options():
 	reset_cursor_position()
+	
 	var index = 0
 	for option in options:
 		var action = option_buttons.instance()

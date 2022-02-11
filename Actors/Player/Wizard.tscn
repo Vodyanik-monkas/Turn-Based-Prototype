@@ -7,3 +7,7 @@
 [node name="Wizard" instance=ExtResource( 2 )]
 frames = ExtResource( 1 )
 portrait = ExtResource( 3 )
+
+[node name="Shadow" parent="." index="2"]
+position = Vector2( -8.59633, 33.0946 )
+scale = Vector2( 1.45085, 0.572307 )

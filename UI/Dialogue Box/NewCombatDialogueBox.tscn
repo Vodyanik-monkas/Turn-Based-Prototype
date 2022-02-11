@@ -90,7 +90,7 @@ script = ExtResource( 8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 18
-custom_constants/margin_top = 11
+custom_constants/margin_top = 10
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 19
 __meta__ = {
@@ -99,7 +99,7 @@ __meta__ = {
 
 [node name="Label" type="RichTextLabel" parent="ToolTip/MarginContainer"]
 margin_left = 20.0
-margin_top = 11.0
+margin_top = 10.0
 margin_right = 368.0
 margin_bottom = 56.0
 custom_fonts/normal_font = SubResource( 3 )
@@ -110,4 +110,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="active_option" from="ToolTipBox/MarginContainer/OptionMenu" to="." method="_on_OptionMenu_active_option"]
-[connection signal="set_tooltip" from="ToolTipBox/MarginContainer/OptionMenu" to="." method="set_tooltip"]
+[connection signal="set_tooltip" from="ToolTipBox/MarginContainer/OptionMenu" to="." method="_on_OptionMenu_set_tooltip"]
