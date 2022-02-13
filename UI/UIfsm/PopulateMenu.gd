@@ -2,11 +2,12 @@ extends Node
 
 signal move_cursor
 signal option_selected
+signal new_menu
 
 var fsm: StateMachine
 
 func enter():
-	print("Hello from PlayerChoice")
+	emit_signal("new_menu", false)
 
 func exit(next_state):
 	fsm.change_to(next_state)

@@ -81,10 +81,10 @@ script = ExtResource( 8 )
 [node name="PlayerChoice" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
 
-[node name="ToggleSkills" type="Node" parent="StateMachine"]
+[node name="OpenSkills" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
 
-[node name="ToggleInventory" type="Node" parent="StateMachine"]
+[node name="OpenInventory" type="Node" parent="StateMachine"]
 script = ExtResource( 11 )
 
 [node name="SelectTarget" type="Node" parent="StateMachine"]
@@ -96,5 +96,11 @@ script = ExtResource( 13 )
 [node name="NextTurn" type="Node" parent="StateMachine"]
 script = ExtResource( 14 )
 [connection signal="set_active_option" from="MarginContainer/VBoxContainer/CombatDialogueBox" to="." method="_on_CombatDialogueBox_set_active_option"]
-[connection signal="move_cursor" from="StateMachine/PlayerChoice" to="." method="_on_PlayerChoice_move_cursor"]
-[connection signal="option_selected" from="StateMachine/PlayerChoice" to="." method="_on_PlayerChoice_option_selected"]
+[connection signal="move_cursor" from="StateMachine/PlayerChoice" to="." method="_move_cursor"]
+[connection signal="new_menu" from="StateMachine/PlayerChoice" to="." method="_new_menu"]
+[connection signal="option_selected" from="StateMachine/PlayerChoice" to="." method="_option_selected"]
+[connection signal="move_cursor" from="StateMachine/OpenSkills" to="." method="_move_cursor"]
+[connection signal="new_menu" from="StateMachine/OpenSkills" to="." method="_new_menu"]
+[connection signal="option_selected" from="StateMachine/OpenSkills" to="." method="_option_selected"]
+[connection signal="change_target" from="StateMachine/SelectTarget" to="." method="_on_SelectTarget_change_target"]
+[connection signal="unselect_all" from="StateMachine/SelectTarget" to="." method="_on_SelectTarget_unselect_all"]

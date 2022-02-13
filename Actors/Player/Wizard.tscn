@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Actors/Sprite_Frames.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://Actors/Actor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Actors/BaseNode/Sprite_Frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Actors/BaseNode/Actor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/UI/CharacterPortraits/WizardPortrait.png" type="Texture" id=3]
 
 [node name="Wizard" instance=ExtResource( 2 )]
@@ -11,3 +11,6 @@ portrait = ExtResource( 3 )
 [node name="Shadow" parent="." index="2"]
 position = Vector2( -8.59633, 33.0946 )
 scale = Vector2( 1.45085, 0.572307 )
+
+[node name="Cursor" parent="." index="3"]
+position = Vector2( -7.01538, -75.577 )

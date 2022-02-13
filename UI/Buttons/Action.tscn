@@ -14,7 +14,9 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
 
-[node name="Action" type="HBoxContainer"]
+[node name="Action" type="HBoxContainer" groups=[
+"options",
+]]
 margin_right = 50.0
 margin_bottom = 14.0
 theme = SubResource( 2 )

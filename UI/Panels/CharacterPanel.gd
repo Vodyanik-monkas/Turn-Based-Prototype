@@ -4,7 +4,6 @@ func _ready():
 	hide()
 
 func set_health(current_health, max_health):
-	print(current_health)
 	$MarginContainer2/HBoxContainer/ResourceBarContainers/VBoxContainer/HealthBar.value = current_health
 	$MarginContainer2/HBoxContainer/ResourceBarContainers/VBoxContainer/HealthBar.max_value = max_health
 	

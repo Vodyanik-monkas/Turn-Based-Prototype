@@ -18,7 +18,6 @@ func initialize_option_menu(character_options):
 	col_count = get_child_count()
 	
 	draw_options()
-	get_selected_option().set_cursor_active()
 	emit_signal("set_tooltip", get_action_tooltip())
 
 # Changes which option is focused on
@@ -35,7 +34,7 @@ func move_cursor(direction_x, direction_y):
 	cursor_position_x = clamp(cursor_position_x, 0, col_count - 1)
 	cursor_position_y = clamp(cursor_position_y, 0, get_options_in_column())
 	
-	emit_signal("active_option", get_selected_option().id)
+	emit_signal("active_option", options[get_selected_option().id])
 	emit_signal("set_tooltip", get_action_tooltip())
 	
 	get_selected_option().set_cursor_active()
@@ -51,15 +50,20 @@ func draw_options():
 		
 		get_child(index % col_count).add_child(action)
 		
+		if index == 0:
+			# queue_free() is called on old options, but certain functions
+			# break if they're called in the same frame as queue free
+			# changing the id of the queued object fixes that
+			get_selected_option().id = option
+			
+			emit_signal("active_option", options[option])
+			action.set_cursor_active()
+		
 		index += 1
-	
-	emit_signal("active_option", get_selected_option().id)
 
-# Gets option cursor is currently on
 func get_selected_option():
 	return get_child(cursor_position_x).get_child(cursor_position_y)
 
-# Returns the number of rows in current cursors column
 func get_options_in_column():
 	return get_child(cursor_position_x).get_child_count() - 1
 
