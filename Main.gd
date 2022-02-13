@@ -10,12 +10,14 @@ func _ready():
 func _on_HUD_new_turn(turn):
 	$HUD.initialize_combat_dialogue_box($Player.get_skillset().option_list)
 
-func _on_HUD_toggle_skills_menu(is_skills_showing: bool):
+func _on_HUD_new_menu(menu: String):
 	get_tree().call_group("options", "queue_free")
-	if is_skills_showing:
-		$HUD.initialize_combat_dialogue_box($Player.get_skillset().skills)
-	else:
-		$HUD.initialize_combat_dialogue_box($Player.get_skillset().option_list)
+	yield(get_tree(), "idle_frame")
+	
+	if menu == "skill":
+		$HUD.initialize_combat_dialogue_box($Player.get_skillset().skills, menu, 1)
+	if menu == "option":
+		$HUD.initialize_combat_dialogue_box($Player.get_skillset().option_list, menu)
 
 func _on_HUD_target_select(target, scope, increment):
 	get_node(target).target(scope, increment)

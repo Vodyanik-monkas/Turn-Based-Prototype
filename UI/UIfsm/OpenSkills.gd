@@ -7,7 +7,7 @@ signal new_menu
 var fsm: StateMachine
 
 func enter():
-	emit_signal("new_menu", true)
+	emit_signal("new_menu", "skill")
 
 func exit(next_state):
 	fsm.change_to(next_state)

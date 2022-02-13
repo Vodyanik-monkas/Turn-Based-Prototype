@@ -1,7 +1,7 @@
 extends Control
 
+signal new_menu
 signal new_turn
-signal toggle_skills_menu
 signal target_select
 signal unselect_all
 
@@ -15,8 +15,8 @@ func set_character_panel(index: int, stats: Node, portrait: Texture):
 	panel.set_portrait(portrait)
 	panel.show()
 
-func initialize_combat_dialogue_box(options_list: Dictionary):
-	$MarginContainer/VBoxContainer/CombatDialogueBox.initialize_combat_dialogue_box(options_list)
+func initialize_combat_dialogue_box(options_list: Dictionary, menu: String, columns: int = 2):
+	$MarginContainer/VBoxContainer/CombatDialogueBox.initialize_combat_dialogue_box(options_list, menu, columns)
 
 func _move_cursor(direction_x: int, direction_y: int):
 	$MarginContainer/VBoxContainer/CombatDialogueBox.move_cursor(direction_x, direction_y)
@@ -30,8 +30,8 @@ func _on_CombatDialogueBox_set_active_option(option: Dictionary):
 func get_character_panel(character_index: int) -> Node:
 	return $MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/VBoxContainer.get_child(character_index)
 
-func _new_menu(is_on: bool):
-	emit_signal("toggle_skills_menu", is_on)
+func _new_menu(menu):
+	emit_signal("new_menu", menu)
 
 
 func _on_SelectTarget_change_target(increment: int = 0):

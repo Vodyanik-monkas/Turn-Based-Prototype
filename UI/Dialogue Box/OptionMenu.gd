@@ -7,17 +7,25 @@ export(PackedScene) var option_buttons
 
 var options = []
 
-# Starting cursor position in Options list
-export var cursor_position_x = 0
-export var cursor_position_y = 0
+var active_menu = "option"
+
+var cursor_positions = {
+	"item": Vector2(0,0),
+	"option": Vector2(0,0),
+	"skill": Vector2(0,0)
+}
 
 var col_count = 2
 
-func initialize_option_menu(character_options):
+func initialize_option_menu(character_options: Dictionary, menu: String, columns: int = 2):
 	options = character_options
-	col_count = get_child_count()
+	col_count = columns
+	active_menu = menu
 	
 	draw_options()
+	
+	get_selected_option().set_cursor_active()
+	emit_signal("active_option", options[get_selected_option().id])
 	emit_signal("set_tooltip", get_action_tooltip())
 
 # Changes which option is focused on
@@ -27,12 +35,11 @@ func move_cursor(direction_x, direction_y):
 	
 	get_selected_option().set_cursor_inactive()
 	
-	cursor_position_x += direction_x
-	cursor_position_y += direction_y
+	cursor_positions[active_menu] += Vector2(direction_x, direction_y)
 	
 	# Prevents the cursor from going out of bounds
-	cursor_position_x = clamp(cursor_position_x, 0, col_count - 1)
-	cursor_position_y = clamp(cursor_position_y, 0, get_options_in_column())
+	cursor_positions[active_menu].x = clamp(cursor_positions[active_menu].x, 0, col_count - 1)
+	cursor_positions[active_menu].y = clamp(cursor_positions[active_menu].y, 0, get_options_in_column())
 	
 	emit_signal("active_option", options[get_selected_option().id])
 	emit_signal("set_tooltip", get_action_tooltip())
@@ -41,35 +48,28 @@ func move_cursor(direction_x, direction_y):
 
 # Instances options and places them
 func draw_options():
-	reset_cursor_position()
-	
 	var index = 0
 	for option in options:
+		print(option)
 		var action = option_buttons.instance()
 		action.id = option
 		
 		get_child(index % col_count).add_child(action)
 		
-		if index == 0:
-			# queue_free() is called on old options, but certain functions
-			# break if they're called in the same frame as queue free
-			# changing the id of the queued object fixes that
-			get_selected_option().id = option
-			
-			emit_signal("active_option", options[option])
-			action.set_cursor_active()
-		
 		index += 1
 
 func get_selected_option():
-	return get_child(cursor_position_x).get_child(cursor_position_y)
+	return get_child(cursor_positions[active_menu].x).get_child(cursor_positions[active_menu].y)
 
 func get_options_in_column():
-	return get_child(cursor_position_x).get_child_count() - 1
+	return get_child(cursor_positions[active_menu].x).get_child_count() - 1
 
-func reset_cursor_position():
-	cursor_position_x = 0
-	cursor_position_y = 0
+func reset_cursor_positions():
+	cursor_positions = {
+	"item": Vector2(0,0),
+	"option": Vector2(0,0),
+	"skill": Vector2(0,0)
+	}
 
 func get_action_tooltip():
 	return options[get_selected_option().id]["tooltip"]

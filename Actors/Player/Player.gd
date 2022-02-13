@@ -51,7 +51,7 @@ func target(scope: String, index_increment: int = 0) -> void:
 	else:
 		$Party.get_child(current_target_index).cursor_inactive()
 		
-		current_target_index += index_increment
+		current_target_index -= index_increment
 		current_target_index = clamp(current_target_index, 0, party_size - 1)
 		
 		$Party.get_child(current_target_index).cursor_active()

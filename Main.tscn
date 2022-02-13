@@ -14,7 +14,7 @@ base = Vector2( 400, 250 )
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
 
 [node name="HUD" parent="." instance=ExtResource( 1 )]
+[connection signal="new_menu" from="HUD" to="." method="_on_HUD_new_menu"]
 [connection signal="new_turn" from="HUD" to="." method="_on_HUD_new_turn"]
 [connection signal="target_select" from="HUD" to="." method="_on_HUD_target_select"]
-[connection signal="toggle_skills_menu" from="HUD" to="." method="_on_HUD_toggle_skills_menu"]
 [connection signal="unselect_all" from="HUD" to="." method="_on_HUD_unselect_all"]
