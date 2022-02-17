@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Actors/BaseNode/Actor.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Actors/Enemies/Slime/SlimeStats.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Enemies/Slime.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -32,11 +31,10 @@ animations = [ {
 frames = SubResource( 5 )
 
 [node name="Stats" parent="." index="0"]
-script = ExtResource( 2 )
-max_health = 20
-current_health = 20
-strength = 5
-magic = 5
+max_health = 10
+current_health = 10
+strength = 3
+magic = 6
 
 [node name="Shadow" parent="." index="2"]
 position = Vector2( -0.249998, 10.125 )

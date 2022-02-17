@@ -104,3 +104,4 @@ script = ExtResource( 14 )
 [connection signal="option_selected" from="StateMachine/OpenSkills" to="." method="_option_selected"]
 [connection signal="change_target" from="StateMachine/SelectTarget" to="." method="_on_SelectTarget_change_target"]
 [connection signal="unselect_all" from="StateMachine/SelectTarget" to="." method="_on_SelectTarget_unselect_all"]
+[connection signal="use_skill" from="StateMachine/CommitAction" to="." method="_on_CommitAction_use_skill"]

@@ -4,6 +4,7 @@ signal new_menu
 signal new_turn
 signal target_select
 signal unselect_all
+signal use_skill
 
 var active_option = []
 
@@ -15,7 +16,7 @@ func set_character_panel(index: int, stats: Node, portrait: Texture):
 	panel.set_portrait(portrait)
 	panel.show()
 
-func initialize_combat_dialogue_box(options_list: Dictionary, menu: String, columns: int = 2):
+func set_combat_dialogue_box(options_list: Dictionary, menu: String, columns: int = 2):
 	$MarginContainer/VBoxContainer/CombatDialogueBox.initialize_combat_dialogue_box(options_list, menu, columns)
 
 func _move_cursor(direction_x: int, direction_y: int):
@@ -44,3 +45,14 @@ func _on_SelectTarget_change_target(increment: int = 0):
 
 func _on_SelectTarget_unselect_all():
 	emit_signal("unselect_all")
+
+
+func _on_CommitAction_use_skill():
+	emit_signal("use_skill", active_option)
+
+func update_character_panel(element: String, index: int, current_resource: int, max_resource: int):
+	var panel = get_character_panel(index)
+	if element == "health":
+		panel.set_health(current_resource, max_resource)
+	if element == "mana":
+		panel.set_mana(current_resource, max_resource)

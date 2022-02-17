@@ -2,13 +2,13 @@ extends Node
 var fsm: StateMachine
 
 signal change_target
-signal select_target
 signal unselect_all
 
 func enter():
 	emit_signal("change_target")
 
 func exit(next_state):
+	emit_signal("unselect_all")
 	fsm.change_to(next_state)
 
 func unhandled_input(event):	
@@ -20,7 +20,7 @@ func unhandled_input(event):
 		emit_signal("change_target", -1)
 	
 	if Input.is_action_just_pressed("ui_accept"):
-		emit_signal("select_target")
+		exit("CommitAction")
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		emit_signal("unselect_all")

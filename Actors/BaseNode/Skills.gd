@@ -21,33 +21,39 @@ var option_list = {
 
 var skills = {
 	attack = {
-		"base_damage": 5,
-		"damage_type": "physical",
+		"base_damage": 20,
+		"effect": "none",
+		"effect_chance": 0,
 		"mana_cost": 0,
 		"next_state": "SelectTarget",
 		"scope": "single",
 		"target": "Enemy",
-		"tooltip": "A weak physical attack to one enemy."
+		"tooltip": "A weak physical attack to one enemy.",
+		"type": "physical"
 	},
 	
 	multislash = {
-		"base_damage": 2,
-		"damage_type": "physical",
-		"mana_cost": 8,
+		"base_damage": 10,
+		"effect": "none",
+		"effect_chance": 0,
+		"mana_cost": 6,
 		"next_state": "SelectTarget",
 		"scope": "all",
 		"target": "Enemy",
-		"tooltip": "A weak physical attack that hits all enemies."
+		"tooltip": "A weak physical attack that hits all enemies.",
+		"type": "physical"
 	},
 	
 	first_aid = {
-		"base_damage": 8,
-		"damage_type": "heal",
+		"base_damage": 6,
+		"effect": "none",
+		"effect_chance": 0,
 		"mana_cost": 4,
 		"next_state": "SelectTarget",
 		"scope": "self",
 		"target": "Player",
-		"tooltip": "Weak heal to self."
+		"tooltip": "Weak heal to self.",
+		"type": "heal"
 	}
 }
 

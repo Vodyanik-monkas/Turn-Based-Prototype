@@ -14,7 +14,10 @@ base = Vector2( 400, 250 )
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
 
 [node name="HUD" parent="." instance=ExtResource( 1 )]
+[connection signal="health_changed" from="Player" to="." method="_on_Player_health_changed"]
+[connection signal="mana_changed" from="Player" to="." method="_on_Player_mana_changed"]
 [connection signal="new_menu" from="HUD" to="." method="_on_HUD_new_menu"]
 [connection signal="new_turn" from="HUD" to="." method="_on_HUD_new_turn"]
 [connection signal="target_select" from="HUD" to="." method="_on_HUD_target_select"]
 [connection signal="unselect_all" from="HUD" to="." method="_on_HUD_unselect_all"]
+[connection signal="use_skill" from="HUD" to="." method="_on_HUD_use_skill"]

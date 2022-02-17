@@ -23,3 +23,5 @@ position = Vector2( 194.649, 269.973 )
 
 [node name="Stock" type="YSort" parent="."]
 visible = false
+[connection signal="health_changed" from="Party/Noble" to="." method="_on_Actor_health_changed"]
+[connection signal="mana_changed" from="Party/Noble" to="." method="_on_Actor_mana_changed"]
