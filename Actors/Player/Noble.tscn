@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Actors/BaseNode/Actor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/PCs/Adventurer/Adventurer-1.5/Individual Sprites/adventurer-idle-2-00.png" type="Texture" id=2]
@@ -12,26 +12,34 @@
 [ext_resource path="res://Assets/PCs/Adventurer/Adventurer-1.5/Individual Sprites/adventurer-attack3-01.png" type="Texture" id=10]
 [ext_resource path="res://Assets/PCs/Adventurer/Adventurer-1.5/Individual Sprites/adventurer-attack3-05.png" type="Texture" id=11]
 [ext_resource path="res://Assets/PCs/Adventurer/Adventurer-1.5/Individual Sprites/adventurer-attack3-03.png" type="Texture" id=12]
+[ext_resource path="res://Assets/PCs/Adventurer/Adventurer-1.5/Individual Sprites/adventurer-items-00.png" type="Texture" id=13]
+[ext_resource path="res://Assets/PCs/Adventurer/Adventurer-1.5/Individual Sprites/adventurer-items-02.png" type="Texture" id=14]
+[ext_resource path="res://Assets/PCs/Adventurer/Adventurer-1.5/Individual Sprites/adventurer-items-01.png" type="Texture" id=15]
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 50, 37 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "idle",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 7 ), ExtResource( 11 ), SubResource( 2 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 7 ), ExtResource( 11 ), SubResource( 1 ) ],
 "loop": true,
-"name": "attack1",
+"name": "attack",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "heal",
 "speed": 8.0
 } ]
 
 [node name="Noble" instance=ExtResource( 1 )]
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 portrait = ExtResource( 6 )
 
 [node name="Stats" parent="." index="0"]
@@ -44,3 +52,7 @@ scale = Vector2( 0.547591, 0.192624 )
 [node name="Cursor" parent="." index="3"]
 position = Vector2( 0.090312, -25.1683 )
 scale = Vector2( 0.33, 0.33 )
+
+[node name="Particles2D" parent="." index="4"]
+position = Vector2( 0, -20 )
+visibility_rect = Rect2( -50, -50, 50, 50 )

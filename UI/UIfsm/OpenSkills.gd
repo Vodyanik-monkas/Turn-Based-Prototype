@@ -12,7 +12,7 @@ func enter():
 func exit(next_state):
 	fsm.change_to(next_state)
 
-func unhandled_input(event):
+func unhandled_input(_event):
 	if Input.is_action_just_pressed("ui_up"):
 		emit_signal("move_cursor", 0, -1)
 	if Input.is_action_just_pressed("ui_down"):

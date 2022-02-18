@@ -11,7 +11,7 @@ func exit(next_state):
 	emit_signal("unselect_all")
 	fsm.change_to(next_state)
 
-func unhandled_input(event):	
+func unhandled_input(_event):	
 	if (Input.is_action_just_pressed("ui_down") or
 	Input.is_action_just_pressed("ui_right")):
 		emit_signal("change_target", 1)

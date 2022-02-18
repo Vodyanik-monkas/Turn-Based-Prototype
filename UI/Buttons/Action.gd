@@ -3,7 +3,7 @@ extends HBoxContainer
 var id = "name"
 
 func _ready():
-	$Label.text = id
+	$Label.text = id.capitalize()
 
 func set_cursor_active():
 	$Selected.show()

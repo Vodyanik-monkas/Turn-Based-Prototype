@@ -23,8 +23,29 @@ func _ready():
 
 	party_size = $Party.get_child_count()
 
+func change_health(character: int, amount: int) -> void:
+	$Party.get_child(character).change_health(amount)
+	
+func change_mana(character: int, amount: int) -> void:
+	$Party.get_child(character).change_mana(amount)
+
+func get_character_portrait(character_index: int) -> Texture:
+	return $Party.get_child(character_index).portrait
+
+func get_skillset() -> Node:
+	return $Party.get_child(active_character).get_skillset()
+
+func get_stats(character_index: int) -> Node:
+	return $Party.get_child(character_index).get_stats()
+
 func next_character() -> void:
 	active_character += 1
+
+func run_animation(character_index: int, animation: String) -> void:
+	$Party.get_child(character_index).run_animation(animation)
+
+func set_and_run_fx(character_index: int, particle_fx: String) -> void:
+	$Party.get_child(character_index).set_and_run_fx(particle_fx)
 
 func set_party_positions() -> void:	
 	for party_position in $Party.get_child_count():
@@ -33,21 +54,6 @@ func set_party_positions() -> void:
 			(-spacing.y * sin(2 * party_position)) + base.y)
 		
 		$Party.get_child(party_position).position = pos
-
-func get_skillset() -> Node:
-	return $Party.get_child(active_character).get_skillset()
-
-func get_stats(character_index: int) -> Node:
-	return $Party.get_child(character_index).get_stats()
-
-func get_character_portrait(character_index: int) -> Texture:
-	return $Party.get_child(character_index).portrait
-
-func change_health(character: int, amount: int) -> void:
-	$Party.get_child(character).change_health(amount)
-	
-func change_mana(character: int, amount: int) -> void:
-	$Party.get_child(character).change_mana(amount)
 
 func target(scope: String, index_increment: int = 0) -> void:
 	current_targets.clear()

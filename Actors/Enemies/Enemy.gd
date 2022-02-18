@@ -16,6 +16,9 @@ func change_health(character: int, amount: int) -> void:
 func get_stats(character_index: int) -> Node:
 	return $Party.get_child(character_index).get_stats()
 
+func run_animation(character_index: int, animation: String) -> void:
+	$Party.get_child(character_index).run_animation(animation)
+
 func set_party_positions() -> void:	
 	for party_position in $Party.get_child_count():
 		var pos = Vector2(
@@ -23,6 +26,9 @@ func set_party_positions() -> void:
 			(-spacing.y * sin(2 * party_position)) + base.y)
 		
 		$Party.get_child(party_position).position = pos
+
+func set_and_run_fx(character_index: int, particle_fx: String) -> void:
+	$Party.get_child(character_index).set_and_run_fx(particle_fx)
 
 func target(scope: String, index_increment: int = 0) -> void:
 	current_targets.clear()

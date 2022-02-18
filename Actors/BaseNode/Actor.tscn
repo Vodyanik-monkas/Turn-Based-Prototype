@@ -1,10 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Misc/shadow.png" type="Texture" id=1]
 [ext_resource path="res://Actors/BaseNode/Actor.gd" type="Script" id=2]
 [ext_resource path="res://Actors/BaseNode/Skills.gd" type="Script" id=3]
 [ext_resource path="res://Actors/BaseNode/Stats.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Misc/CharacterCursor.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Particles/sparkle.png" type="Texture" id=6]
+[ext_resource path="res://Actors/BaseNode/Particles2D.gd" type="Script" id=7]
+[ext_resource path="res://Actors/BaseNode/ParticlesAvailable.gd" type="Script" id=8]
+[ext_resource path="res://Assets/Particles/teepee.png" type="Texture" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -30,6 +34,12 @@ animations = [ {
 "speed": 2.0
 } ]
 
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
 [node name="Actor" type="AnimatedSprite"]
 frames = SubResource( 1 )
 animation = "idle"
@@ -52,4 +62,18 @@ visible = false
 position = Vector2( 0, -55.0921 )
 frames = SubResource( 4 )
 animation = "idle"
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, -50 )
+scale = Vector2( 0.5, 0.5 )
+emitting = false
+amount = 20
+local_coords = false
+process_material = SubResource( 5 )
+script = ExtResource( 7 )
+
+[node name="Particles" type="Node" parent="Particles2D"]
+script = ExtResource( 8 )
+sparkle = ExtResource( 6 )
+teepee = ExtResource( 9 )
 [connection signal="animation_finished" from="." to="." method="_on_Actor_animation_finished"]

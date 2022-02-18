@@ -25,6 +25,9 @@ position = Vector2( 10, -10 )
 frames = SubResource( 1 )
 portrait = ExtResource( 11 )
 
+[node name="Stats" parent="." index="0"]
+current_health = 13
+
 [node name="Shadow" parent="." index="2"]
 position = Vector2( -11.75, 25.4528 )
 scale = Vector2( 0.609375, 0.150335 )
@@ -32,3 +35,6 @@ scale = Vector2( 0.609375, 0.150335 )
 [node name="Cursor" parent="." index="3"]
 position = Vector2( -10.1723, -36.2909 )
 scale = Vector2( 0.619, 0.619 )
+
+[node name="Particles2D" parent="." index="4"]
+position = Vector2( -10, -35 )

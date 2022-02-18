@@ -23,7 +23,7 @@ func change_health(health):
 	$Stats.current_health = clamp($Stats.current_health, 0, $Stats.max_health)
 	if $Stats.current_health <= 0:
 		emit_signal("dead")
-	
+
 	emit_signal("health_changed", self.get_index(), $Stats.current_health, $Stats.max_health)
 
 func change_mana(mana):
@@ -45,3 +45,19 @@ func get_skillset() -> Node:
 
 func get_stats() -> Node:
 	return $Stats
+
+func run_animation(animation_name: String) -> void:
+	if animation_name == "hurt":
+		playing = false
+		modulate = "#40ffffff"
+		yield(get_tree().create_timer(.15), "timeout")
+		modulate = "#70ffffff"
+		yield(get_tree().create_timer(.1), "timeout")
+		modulate = "#ffffffff"
+		yield(get_tree().create_timer(.1), "timeout")
+		playing = true
+	else:
+		animation = animation_name
+
+func set_and_run_fx(particle_fx: String) -> void:
+	$Particles2D.set_and_run_fx(particle_fx)
