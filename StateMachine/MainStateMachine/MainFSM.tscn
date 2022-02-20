@@ -30,7 +30,7 @@ script = ExtResource( 5 )
 [node name="CommitAction" type="Node" parent="."]
 script = ExtResource( 2 )
 
-[node name="NextTurn" type="Node" parent="."]
+[node name="EnemyTurn" type="Node" parent="."]
 script = ExtResource( 3 )
 [connection signal="move_cursor" from="OptionMenu" to="." method="_on_Menu_State_move_cursor"]
 [connection signal="new_menu" from="OptionMenu" to="." method="_on_Menu_State_new_menu"]

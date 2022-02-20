@@ -28,11 +28,15 @@ func _on_StateMachine_new_menu(menu: String) -> void:
 	yield(get_tree(), "idle_frame")
 	
 	if menu == "skill":
-		$HUD.set_combat_dialogue_box($Player.get_skillset().skills, menu, 1)
+		$HUD.set_combat_dialogue_box(
+			$Player.get_skillset().skills, 
+			menu, 
+			$Player.get_stats($Player.active_character).current_mana
+		)
 	if menu == "option":
 		$HUD.set_combat_dialogue_box($Player.get_skillset().option_list, menu)
 
-func _on_StateMachine_option_selected():
+func _on_StateMachine_option_selected() -> void:
 	var selected_option = $HUD.get_hovered_option()
 	if !selected_option.empty():
 		$StateMachine.change_to(selected_option["next_state"])
@@ -56,8 +60,8 @@ func _on_StateMachine_use_skill() -> void:
 	
 	attacker_stats = attacker.get_stats(attacker.active_character)
 	if attacker_stats.current_mana < skill["mana_cost"]:
-		$StateMachine.back()
-		return
+		var diff = skill["mana_cost"] - attacker_stats.current_mana
+		attacker.change_health(attacker.active_character, -diff * 2)
 	
 	attacker.run_animation(attacker.active_character, skill["animation"])
 	attacker.change_mana(attacker.active_character, -skill["mana_cost"])

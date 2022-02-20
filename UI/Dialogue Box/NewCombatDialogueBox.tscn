@@ -35,9 +35,9 @@ __meta__ = {
 }
 
 [node name="OptionPanel" type="NinePatchRect" parent="."]
-margin_right = 250.0
-margin_bottom = 275.0
-rect_min_size = Vector2( 250, 275 )
+margin_right = 265.0
+margin_bottom = 285.0
+rect_min_size = Vector2( 265, 285 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = SubResource( 2 )
@@ -46,7 +46,7 @@ texture = ExtResource( 3 )
 [node name="Margins" type="MarginContainer" parent="OptionPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 40
+custom_constants/margin_right = 20
 custom_constants/margin_top = 45
 custom_constants/margin_left = 40
 custom_constants/margin_bottom = 40
@@ -57,28 +57,28 @@ __meta__ = {
 [node name="OptionMenu" type="HBoxContainer" parent="OptionPanel/Margins"]
 margin_left = 40.0
 margin_top = 45.0
-margin_right = 210.0
-margin_bottom = 235.0
+margin_right = 245.0
+margin_bottom = 245.0
 custom_constants/separation = 10
 script = ExtResource( 6 )
 option_buttons = ExtResource( 5 )
 
 [node name="Column1" type="VBoxContainer" parent="OptionPanel/Margins/OptionMenu"]
 margin_right = 100.0
-margin_bottom = 190.0
+margin_bottom = 200.0
 rect_min_size = Vector2( 100, 0 )
 
 [node name="Column2" type="VBoxContainer" parent="OptionPanel/Margins/OptionMenu"]
 margin_left = 110.0
-margin_right = 170.0
-margin_bottom = 190.0
-size_flags_horizontal = 3
+margin_right = 205.0
+margin_bottom = 200.0
+size_flags_horizontal = 11
 
 [node name="ToolTip" type="TextureRect" parent="."]
-margin_left = 254.0
-margin_top = 200.0
+margin_left = 269.0
+margin_top = 210.0
 margin_right = 640.0
-margin_bottom = 275.0
+margin_bottom = 285.0
 rect_min_size = Vector2( 100, 75 )
 size_flags_horizontal = 3
 size_flags_vertical = 8
@@ -100,7 +100,7 @@ __meta__ = {
 [node name="Label" type="RichTextLabel" parent="ToolTip/Margins"]
 margin_left = 20.0
 margin_top = 10.0
-margin_right = 368.0
+margin_right = 353.0
 margin_bottom = 56.0
 custom_fonts/normal_font = SubResource( 3 )
 custom_colors/default_color = Color( 0.439216, 0.321569, 0.25098, 1 )

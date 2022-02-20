@@ -27,14 +27,14 @@ animations = [ {
 "name": "idle",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 7 ), ExtResource( 11 ), SubResource( 1 ) ],
-"loop": true,
-"name": "attack",
-"speed": 8.0
-}, {
 "frames": [ ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ) ],
 "loop": true,
 "name": "heal",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 7 ), ExtResource( 11 ), SubResource( 1 ) ],
+"loop": true,
+"name": "attack",
 "speed": 8.0
 } ]
 
@@ -44,7 +44,7 @@ portrait = ExtResource( 6 )
 
 [node name="Stats" parent="." index="0"]
 current_health = 14
-current_mana = 5
+current_mana = 3
 
 [node name="Shadow" parent="." index="2"]
 position = Vector2( -0.556793, 14.143 )
