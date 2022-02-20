@@ -17,8 +17,9 @@ default_font = SubResource( 1 )
 [node name="Action" type="HBoxContainer" groups=[
 "options",
 ]]
-margin_right = 50.0
+margin_right = 263.0
 margin_bottom = 14.0
+size_flags_horizontal = 3
 theme = SubResource( 2 )
 script = ExtResource( 3 )
 __meta__ = {

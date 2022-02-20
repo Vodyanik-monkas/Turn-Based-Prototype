@@ -10,10 +10,20 @@ func _ready():
 		
 		$HUD.set_character_panel(i, s, p)
 
-func _on_HUD_new_turn(turn: int) -> void:
-	$HUD.set_combat_dialogue_box($Player.get_skillset().option_list)
+func _on_Player_health_changed(character_index: int, current_health: int, max_health: int) -> void:
+	$HUD.update_character_panel("health", character_index, current_health, max_health)
 
-func _on_HUD_new_menu(menu: String) -> void:
+func _on_Player_mana_changed(character_index: int, current_health: int, max_health: int) -> void:
+	$HUD.update_character_panel("mana", character_index, current_health, max_health)
+
+func _on_StateMachine_change_target(increment) -> void:
+	var skill = $HUD.get_hovered_option()
+	get_node(skill["target"]).target(skill["scope"], increment)
+
+func _on_StateMachine_move_cursor(direction: Vector2) -> void:
+	$HUD.move_cursor(direction.x, direction.y)
+
+func _on_StateMachine_new_menu(menu: String) -> void:
 	get_tree().call_group("options", "queue_free")
 	yield(get_tree(), "idle_frame")
 	
@@ -22,24 +32,35 @@ func _on_HUD_new_menu(menu: String) -> void:
 	if menu == "option":
 		$HUD.set_combat_dialogue_box($Player.get_skillset().option_list, menu)
 
-func _on_HUD_target_select(target: String, scope: String, increment: int) -> void:
-	get_node(target).target(scope, increment)
+func _on_StateMachine_option_selected():
+	var selected_option = $HUD.get_hovered_option()
+	if !selected_option.empty():
+		$StateMachine.change_to(selected_option["next_state"])
 
-func _on_HUD_unselect_all() -> void:
+func _on_StateMachine_unselect_all() -> void:
 	$Player.unselect()
 	$Enemy.unselect()
 
-func _on_HUD_use_skill(skill: Dictionary) -> void:
+func _on_StateMachine_use_skill() -> void:
+	var skill = $HUD.get_hovered_option()
+	
+	var attacker
 	var attacker_stats
 	var defenders
 	var targeted_group = get_node(skill["target"])
 	
 	if is_player_turn:
-		attacker_stats = $Player.get_stats($Player.active_character)
-		$Player.run_animation($Player.active_character, skill["animation"])
-		$Player.change_mana($Player.active_character, -skill["mana_cost"])
+		attacker = $Player
 	else:
-		attacker_stats = $Enemy.get_stats(0)
+		attacker = $Enemy
+	
+	attacker_stats = attacker.get_stats(attacker.active_character)
+	if attacker_stats.current_mana < skill["mana_cost"]:
+		$StateMachine.back()
+		return
+	
+	attacker.run_animation(attacker.active_character, skill["animation"])
+	attacker.change_mana(attacker.active_character, -skill["mana_cost"])
 	
 	defenders = targeted_group.current_targets
 	for defender in defenders:
@@ -71,12 +92,6 @@ func _on_HUD_use_skill(skill: Dictionary) -> void:
 				targeted_group.apply_effect(skill["effect"])
 		
 		targeted_group.set_and_run_fx(defender, skill["particle_fx"])
-
-func _on_Player_health_changed(character_index: int, current_health: int, max_health: int) -> void:
-	$HUD.update_character_panel("health", character_index, current_health, max_health)
-
-func _on_Player_mana_changed(character_index: int, current_health: int, max_health: int) -> void:
-	$HUD.update_character_panel("mana", character_index, current_health, max_health)
 
 func calculate_damage(skill: Dictionary, attacking_stat: int, defending_stat: int) -> int:
 	if does_it_hit(skill["accuracy"]):

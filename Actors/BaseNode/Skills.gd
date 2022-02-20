@@ -2,7 +2,7 @@ extends Node
 
 var option_list = {
 	fight = {
-		"next_state": "OpenSkills",
+		"next_state": "SkillMenu",
 		"tooltip": "Better fight than flight, I always say."
 	}, 
 	defend = {

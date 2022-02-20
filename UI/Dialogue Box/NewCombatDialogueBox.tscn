@@ -34,7 +34,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ToolTipBox" type="NinePatchRect" parent="."]
+[node name="OptionPanel" type="NinePatchRect" parent="."]
 margin_right = 250.0
 margin_bottom = 275.0
 rect_min_size = Vector2( 250, 275 )
@@ -43,7 +43,7 @@ size_flags_vertical = 0
 theme = SubResource( 2 )
 texture = ExtResource( 3 )
 
-[node name="MarginContainer" type="MarginContainer" parent="ToolTipBox"]
+[node name="Margins" type="MarginContainer" parent="OptionPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 40
@@ -54,7 +54,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionMenu" type="HBoxContainer" parent="ToolTipBox/MarginContainer"]
+[node name="OptionMenu" type="HBoxContainer" parent="OptionPanel/Margins"]
 margin_left = 40.0
 margin_top = 45.0
 margin_right = 210.0
@@ -63,12 +63,12 @@ custom_constants/separation = 10
 script = ExtResource( 6 )
 option_buttons = ExtResource( 5 )
 
-[node name="Column1" type="VBoxContainer" parent="ToolTipBox/MarginContainer/OptionMenu"]
+[node name="Column1" type="VBoxContainer" parent="OptionPanel/Margins/OptionMenu"]
 margin_right = 100.0
 margin_bottom = 190.0
 rect_min_size = Vector2( 100, 0 )
 
-[node name="Column2" type="VBoxContainer" parent="ToolTipBox/MarginContainer/OptionMenu"]
+[node name="Column2" type="VBoxContainer" parent="OptionPanel/Margins/OptionMenu"]
 margin_left = 110.0
 margin_right = 170.0
 margin_bottom = 190.0
@@ -86,7 +86,7 @@ texture = ExtResource( 2 )
 expand = true
 script = ExtResource( 8 )
 
-[node name="MarginContainer" type="MarginContainer" parent="ToolTip"]
+[node name="Margins" type="MarginContainer" parent="ToolTip"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 18
@@ -97,7 +97,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="RichTextLabel" parent="ToolTip/MarginContainer"]
+[node name="Label" type="RichTextLabel" parent="ToolTip/Margins"]
 margin_left = 20.0
 margin_top = 10.0
 margin_right = 368.0
@@ -109,5 +109,4 @@ scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="active_option" from="ToolTipBox/MarginContainer/OptionMenu" to="." method="_on_OptionMenu_active_option"]
-[connection signal="set_tooltip" from="ToolTipBox/MarginContainer/OptionMenu" to="." method="_on_OptionMenu_set_tooltip"]
+[connection signal="set_tooltip" from="OptionPanel/Margins/OptionMenu" to="." method="_on_OptionMenu_set_tooltip"]

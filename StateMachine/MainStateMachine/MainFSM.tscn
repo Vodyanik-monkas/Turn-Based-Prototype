@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://StateMachine/MainStateMachine/MainFSM.gd" type="Script" id=1]
+[ext_resource path="res://UI/UIfsm/CommitAction.gd" type="Script" id=2]
+[ext_resource path="res://UI/UIfsm/NextTurn.gd" type="Script" id=3]
+[ext_resource path="res://UI/UIfsm/SkillMenu.gd" type="Script" id=4]
+[ext_resource path="res://UI/UIfsm/SelectTarget.gd" type="Script" id=5]
+[ext_resource path="res://UI/UIfsm/OptionMenu.gd" type="Script" id=6]
+[ext_resource path="res://UI/UIfsm/InventoryMenu.gd" type="Script" id=7]
+[ext_resource path="res://StateMachine/MainStateMachine/StockMenu.gd" type="Script" id=8]
+
+[node name="StateMachine" type="Node"]
+script = ExtResource( 1 )
+
+[node name="OptionMenu" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="SkillMenu" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="InventoryMenu" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="StockMenu" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="SelectTarget" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="CommitAction" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="NextTurn" type="Node" parent="."]
+script = ExtResource( 3 )
+[connection signal="move_cursor" from="OptionMenu" to="." method="_on_Menu_State_move_cursor"]
+[connection signal="new_menu" from="OptionMenu" to="." method="_on_Menu_State_new_menu"]
+[connection signal="option_selected" from="OptionMenu" to="." method="_on_Menu_State_option_selected"]
+[connection signal="move_cursor" from="SkillMenu" to="." method="_on_Menu_State_move_cursor"]
+[connection signal="new_menu" from="SkillMenu" to="." method="_on_Menu_State_new_menu"]
+[connection signal="option_selected" from="SkillMenu" to="." method="_on_Menu_State_option_selected"]
+[connection signal="change_target" from="SelectTarget" to="." method="_on_SelectTarget_change_target"]
+[connection signal="unselect_all" from="SelectTarget" to="." method="_on_SelectTarget_unselect_all"]
+[connection signal="use_skill" from="CommitAction" to="." method="_on_CommitAction_use_skill"]

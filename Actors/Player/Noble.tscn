@@ -44,6 +44,7 @@ portrait = ExtResource( 6 )
 
 [node name="Stats" parent="." index="0"]
 current_health = 14
+current_mana = 5
 
 [node name="Shadow" parent="." index="2"]
 position = Vector2( -0.556793, 14.143 )

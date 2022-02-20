@@ -35,6 +35,7 @@ func target(scope: String, index_increment: int = 0) -> void:
 	
 	if scope == "all":
 		for character in $Party.get_children():
+			print("occuring")
 			character.cursor_active()
 			current_targets.append(character.get_index())
 	elif scope == "single":
