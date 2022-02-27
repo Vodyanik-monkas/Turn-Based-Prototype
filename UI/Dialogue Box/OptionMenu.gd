@@ -56,7 +56,6 @@ func move_cursor(direction_x, direction_y) -> void:
 func draw_options() -> void:
 	var index = 0
 	for option in options:
-		print(option)
 		var action = option_buttons.instance()
 		action.id = option
 		

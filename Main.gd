@@ -45,72 +45,24 @@ func _on_StateMachine_unselect_all() -> void:
 	$Player.unselect()
 	$Enemy.unselect()
 
-func _on_StateMachine_use_skill() -> void:
-	var skill = $HUD.get_hovered_option()
-	
-	var attacker
-	var attacker_stats
-	var defenders
+func _on_StateMachine_use_skill(node_name: String, skill: Dictionary = $HUD.get_hovered_option()) -> void:
+	var attacker = get_node(node_name)
+	var attacker_stats = attacker.get_stats(attacker.active_character)
 	var targeted_group = get_node(skill["target"])
-	
-	if is_player_turn:
-		attacker = $Player
-	else:
-		attacker = $Enemy
-	
-	attacker_stats = attacker.get_stats(attacker.active_character)
+
 	if attacker_stats.current_mana < skill["mana_cost"]:
 		var diff = skill["mana_cost"] - attacker_stats.current_mana
 		attacker.change_health(attacker.active_character, -diff * 2)
-	
+
 	attacker.run_animation(attacker.active_character, skill["animation"])
 	attacker.change_mana(attacker.active_character, -skill["mana_cost"])
 	
-	defenders = targeted_group.current_targets
-	for defender in defenders:
-		match skill["type"]:
-			"physical":
-				var d = calculate_damage(
-					skill, 
-					attacker_stats.strength, 
-					targeted_group.get_stats(defender).physical_defense)
-				
-				targeted_group.change_health(defender, d)
-				targeted_group.run_animation(defender, "hurt")
-			"magical":
-				var d = calculate_damage(
-					skill, 
-					attacker_stats.magic, 
-					targeted_group.get_stats(defender).magical_defense)
-				
-				targeted_group.change_health(defender, d)
-				targeted_group.run_animation(defender, "hurt")
-			"heal":
-				targeted_group.change_health(defender, skill["base_damage"])
-				targeted_group.run_animation(defender, skill["animation"])
-			"effect":
-				print("effecting")
-		
-		if skill["effect"] != "none":
-			if does_it_hit(skill["effect_chance"]):
-				targeted_group.apply_effect(skill["effect"])
-		
-		targeted_group.set_and_run_fx(defender, skill["particle_fx"])
-
-func calculate_damage(skill: Dictionary, attacking_stat: int, defending_stat: int) -> int:
-	if does_it_hit(skill["accuracy"]):
-		return 0
-	
-	var unmitigated_damage = -(
-		attacking_stat * ((100 + skill["base_damage"]) / 100.0))
-	
-	var mitigated_damage = unmitigated_damage * (100 / (100.0 + defending_stat))
-
-	return int(round(mitigated_damage))
-
-func does_it_hit(accuracy: int) -> bool:
-	var rando = randi() % 101
-	if rando < accuracy:
-		return true
-	
-	return false
+	match skill["type"]:
+		"physical":
+			targeted_group.take_damage(skill, attacker_stats.strength)
+		"magical":
+			targeted_group.take_damage(skill, attacker_stats.magic)
+		"heal":
+			targeted_group.heal(skill)
+		"effect":
+			targeted_group.apply_effect(skill)

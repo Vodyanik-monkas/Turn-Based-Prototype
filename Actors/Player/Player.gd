@@ -23,11 +23,21 @@ func _ready():
 
 	party_size = $Party.get_child_count()
 
+func apply_effect(skill: Dictionary) -> void:
+	pass
+
 func change_health(character: int, amount: int) -> void:
 	$Party.get_child(character).change_health(amount)
-	
+
 func change_mana(character: int, amount: int) -> void:
 	$Party.get_child(character).change_mana(amount)
+
+func does_it_hit(accuracy: int) -> bool:
+	var rando = randi() % 101
+	if rando > accuracy:
+		return false
+	
+	return true
 
 func get_character_portrait(character_index: int) -> Texture:
 	return $Party.get_child(character_index).portrait
@@ -37,6 +47,15 @@ func get_skillset() -> Node:
 
 func get_stats(character_index: int) -> Node:
 	return $Party.get_child(character_index).get_stats()
+
+func heal(skill: Dictionary) -> void:
+	for defender in current_targets:
+		if skill["effect"] != "none":
+			apply_effect(skill)
+		
+		change_health(defender, skill["base_damage"])
+		run_animation(defender, skill["animation"])
+		set_and_run_fx(defender, skill["particle_fx"])
 
 func next_character() -> void:
 	active_character += 1
@@ -54,6 +73,31 @@ func set_party_positions() -> void:
 			(-spacing.y * sin(2 * party_position)) + base.y)
 		
 		$Party.get_child(party_position).position = pos
+
+func take_damage(skill: Dictionary, attack: int) -> void:
+	for defender in current_targets:
+		if !does_it_hit(skill["accuracy"]):
+			attack = 0
+		
+		var defense: int
+		match skill["type"]:
+			"physical":
+				defense = get_stats(defender).physical_defense
+			"magical":
+				defense = get_stats(defender).magical_defense
+		
+		var unmitigated_damage = -(attack * ((100 + skill["base_damage"]) / 100.0))
+		
+		var mitigated_damage = unmitigated_damage * (100 / (100.0 + defense))
+
+		var damage = int(round(mitigated_damage))
+		
+		if skill["effect"] != "none" and damage != 0:
+			apply_effect(skill)
+		
+		change_health(defender, damage)
+		run_animation(defender, "hurt")
+		set_and_run_fx(defender, skill["particle_fx"])
 
 func target(scope: String, index_increment: int = 0) -> void:
 	current_targets.clear()

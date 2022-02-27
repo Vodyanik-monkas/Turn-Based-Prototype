@@ -1,5 +1,7 @@
 extends AnimatedSprite
 
+class_name Actor
+
 signal dead
 signal mana_changed
 signal health_changed
@@ -11,12 +13,6 @@ func _on_Actor_animation_finished():
 
 func _ready():
 	playing = true
-
-func actor_attack():
-	animation = "Attack1"
-
-func actor_defend():
-	animation = "Attack2"
 
 func change_health(health):
 	$Stats.current_health += health

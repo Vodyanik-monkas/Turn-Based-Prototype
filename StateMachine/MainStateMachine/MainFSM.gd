@@ -7,8 +7,8 @@ signal option_selected
 signal use_skill
 signal unselect_all
 
-func _on_CommitAction_use_skill() -> void:
-	emit_signal("use_skill")
+func _on_CommitAction_use_skill(node_name: String) -> void:
+	emit_signal("use_skill", node_name)
 
 func _on_Menu_State_move_cursor(direction: Vector2) -> void:
 	emit_signal("move_cursor", direction)
