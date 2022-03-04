@@ -1,14 +1,17 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Actors/Enemies/Slime/Slime.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Actors/Enemies/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Actors/ActorGroups/Enemy/Enemy.gd" type="Script" id=2]
 
 [node name="Enemy" type="Node"]
 script = ExtResource( 2 )
+spacing = Vector2( 250, 150 )
+base = Vector2( 700, 250 )
 
 [node name="Party" type="YSort" parent="."]
 
 [node name="Slime" parent="Party" instance=ExtResource( 1 )]
+aggro_multiplier = 2.0
 
 [node name="Slime2" parent="Party" instance=ExtResource( 1 )]
 

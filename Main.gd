@@ -4,7 +4,7 @@ var is_player_turn: bool = true
 
 func _ready():
 	randomize()
-	for i in range(0, $Player.party_size):
+	for i in range(0, $Player/Party.get_child_count()):
 		var s = $Player.get_stats(i)
 		var p = $Player.get_character_portrait(i)
 		
@@ -18,6 +18,8 @@ func _on_Player_mana_changed(character_index: int, current_health: int, max_heal
 
 func _on_StateMachine_change_target(increment) -> void:
 	var skill = $HUD.get_hovered_option()
+	if skill["target"] == "Enemy":
+		increment = increment * -1
 	get_node(skill["target"]).target(skill["scope"], increment)
 
 func _on_StateMachine_move_cursor(direction: Vector2) -> void:

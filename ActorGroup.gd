@@ -1,24 +1,22 @@
 extends Node
 
-export(Vector2) var spacing = Vector2(250, 150)
-export(Vector2) var base = Vector2(700, 250)
+class_name ActorGroup
+
+export(Vector2) var spacing = Vector2(150, 125)
+export(Vector2) var base = Vector2(325, 250)
 
 var active_character: int = 0
 var current_targets: Array
 var current_targets_index: int = 0
 
-func _ready():
-	set_party_positions()
-
 func apply_effect(skill: Dictionary) -> void:
 	pass
 
-func change_aggro(character: int, amount: float) -> void:
-	$Party.get_child(character).change_aggro(amount)
-	update_active_character()
-
 func change_health(character: int, amount: int) -> void:
 	$Party.get_child(character).change_health(amount)
+
+func change_mana(character: int, amount: int) -> void:
+	$Party.get_child(character).change_mana(amount)
 
 func does_it_hit(accuracy: int) -> bool:
 	var rando = randi() % 101
@@ -26,6 +24,15 @@ func does_it_hit(accuracy: int) -> bool:
 		return false
 	
 	return true
+
+func get_character_portrait(character_index: int) -> Texture:
+	return $Party.get_child(character_index).portrait
+
+func get_skillset() -> Node:
+	return $Party.get_child(active_character).get_skillset()
+
+func get_stats(character_index: int) -> Node:
+	return $Party.get_child(character_index).get_stats()
 
 func heal(skill: Dictionary) -> void:
 	for defender in current_targets:
@@ -36,22 +43,19 @@ func heal(skill: Dictionary) -> void:
 		run_animation(defender, skill["animation"])
 		set_and_run_fx(defender, skill["particle_fx"])
 
-func get_stats(character_index: int) -> Node:
-	return $Party.get_child(character_index).get_stats()
-
 func run_animation(character_index: int, animation: String) -> void:
 	$Party.get_child(character_index).run_animation(animation)
 
-func set_party_positions() -> void:	
+func set_and_run_fx(character_index: int, particle_fx: String) -> void:
+	$Party.get_child(character_index).set_and_run_fx(particle_fx)
+
+func set_party_positions(x_direction: int) -> void:	
 	for party_position in $Party.get_child_count():
 		var pos = Vector2(
-			((spacing.x / $Party.get_child_count()) * party_position) + base.x, 
+			x_direction * ((spacing.x / $Party.get_child_count()) * party_position) + base.x, 
 			(-spacing.y * sin(2 * party_position)) + base.y)
 		
 		$Party.get_child(party_position).position = pos
-
-func set_and_run_fx(character_index: int, particle_fx: String) -> void:
-	$Party.get_child(character_index).set_and_run_fx(particle_fx)
 
 func take_damage(skill: Dictionary, attack: int) -> void:
 	for defender in current_targets:
@@ -85,21 +89,18 @@ func target(scope: String, index_increment: int = 0) -> void:
 		for character in $Party.get_children():
 			character.cursor_active()
 			current_targets.append(character.get_index())
+	elif scope == "self":
+		$Party.get_child(active_character).cursor_active()
+		current_targets.append(active_character)
 	elif scope == "single":
 		$Party.get_child(current_targets_index).cursor_inactive()
 		
-		current_targets_index += index_increment
-
+		current_targets_index -= index_increment
 		current_targets_index = clamp(current_targets_index, 0, $Party.get_child_count() - 1)
-
+		
 		$Party.get_child(current_targets_index).cursor_active()
-		current_targets.append($Party.get_child(current_targets_index).get_index())
+		current_targets.append(current_targets_index)
 
 func unselect() -> void:
 	for character in $Party.get_children():
 		character.cursor_inactive()
-
-func update_active_character():
-	for child in $Party.get_children():
-		if child.aggro > $Party.get_child(active_character).aggro:
-			active_character = child.get_index()

@@ -75,7 +75,7 @@ var skills = {
 		"mana_cost": 4,
 		"next_state": "SelectTarget",
 		"particle_fx": "heal",
-		"scope": "self",
+		"scope": "single",
 		"target": "Player",
 		"tooltip": "Weak heal to self.",
 		"type": "heal"
