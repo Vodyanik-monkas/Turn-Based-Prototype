@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://ActorGroup.gd" type="Script" id=1]
+[ext_resource path="res://Actors/ActorGroups/ActorGroup.gd" type="Script" id=1]
+
 
 [node name="ActorGroup" type="Node"]
 script = ExtResource( 1 )

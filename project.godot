@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "ActorGroup",
 "language": "GDScript",
-"path": "res://ActorGroup.gd"
+"path": "res://Actors/ActorGroups/ActorGroup.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",

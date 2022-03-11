@@ -36,8 +36,8 @@ script = ExtResource( 2 )
 [node name="Stats" parent="." index="0"]
 max_health = 10
 current_health = 10
-strength = 3
-magic = 6
+strength = 6
+magic = 3
 
 [node name="Skills" parent="." index="1"]
 script = ExtResource( 4 )

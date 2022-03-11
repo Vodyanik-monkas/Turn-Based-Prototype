@@ -41,3 +41,4 @@ script = ExtResource( 3 )
 [connection signal="change_target" from="SelectTarget" to="." method="_on_SelectTarget_change_target"]
 [connection signal="unselect_all" from="SelectTarget" to="." method="_on_SelectTarget_unselect_all"]
 [connection signal="use_skill" from="CommitAction" to="." method="_on_CommitAction_use_skill"]
+[connection signal="enemy_turn" from="EnemyTurn" to="." method="_on_EnemyTurn_enemy_turn"]

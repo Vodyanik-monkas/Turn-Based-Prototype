@@ -77,7 +77,7 @@ var skills = {
 		"particle_fx": "heal",
 		"scope": "single",
 		"target": "Player",
-		"tooltip": "Weak heal to self.",
+		"tooltip": "Weak heal to single teammate.",
 		"type": "heal"
 	}
 }

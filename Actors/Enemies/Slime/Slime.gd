@@ -5,7 +5,7 @@ signal aggro_updated
 var boons = []
 var debuffs = []
 
-var aggro: float = 0
+export(float) var aggro = 0
 export(float, 0.5, 2, 0.1) var aggro_multiplier = 1
 
 enum State {
@@ -19,14 +19,15 @@ var current_state = State.HEALTHY
 func change_aggro(amount: float) -> void:
 	aggro += amount
 
-func take_action():
+func use_what_skill() -> Dictionary:
 	match current_state:
 		State.HEALTHY:
-			use_skill($Skills.skills["pound"])
+			return $Skills.skills["pound"]
 		State.INJURED:
 			print("injured")
+			return {}
 		State.BLOODIED:
 			print("Bloodied")
-
-func use_skill(skill: Dictionary):
-	print(skill)
+			return {}
+		_:
+			return {}

@@ -11,3 +11,8 @@ func _on_Actor_mana_changed(character_index: int, current_health: int, max_healt
 
 func _ready():
 	set_party_positions(-1)
+
+func next_character() -> void:
+	active_character += 1
+	if active_character > $Party.get_child_count() - 1:
+		active_character = 0

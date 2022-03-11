@@ -27,14 +27,14 @@ animations = [ {
 "name": "idle",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 4 ), ExtResource( 10 ), SubResource( 1 ) ],
-"loop": true,
-"name": "attack",
-"speed": 8.0
-}, {
 "frames": [ ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ) ],
 "loop": true,
 "name": "heal",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 4 ), ExtResource( 10 ), SubResource( 1 ) ],
+"loop": true,
+"name": "attack",
 "speed": 8.0
 } ]
 

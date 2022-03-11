@@ -22,6 +22,19 @@ func _on_StateMachine_change_target(increment) -> void:
 		increment = increment * -1
 	get_node(skill["target"]).target(skill["scope"], increment)
 
+func _on_StateMachine_enemy_turn() -> void:
+	$Player.next_character()
+	var skill: Dictionary = $Enemy.start_turn()
+	
+	var target: Node = get_node(skill["target"])
+	
+	target.current_targets.clear()
+	target.current_targets.append(randi() % target.get_node("Party").get_child_count())
+	
+	_on_StateMachine_use_skill("Enemy", skill)
+	
+	$StateMachine.change_to("OptionMenu")
+
 func _on_StateMachine_move_cursor(direction: Vector2) -> void:
 	$HUD.move_cursor(direction.x, direction.y)
 
@@ -68,3 +81,4 @@ func _on_StateMachine_use_skill(node_name: String, skill: Dictionary = $HUD.get_
 			targeted_group.heal(skill)
 		"effect":
 			targeted_group.apply_effect(skill)
+

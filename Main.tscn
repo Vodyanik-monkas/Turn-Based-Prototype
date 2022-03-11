@@ -20,6 +20,7 @@ base = Vector2( 425, 250 )
 [connection signal="health_changed" from="Player" to="." method="_on_Player_health_changed"]
 [connection signal="mana_changed" from="Player" to="." method="_on_Player_mana_changed"]
 [connection signal="change_target" from="StateMachine" to="." method="_on_StateMachine_change_target"]
+[connection signal="enemy_turn" from="StateMachine" to="." method="_on_StateMachine_enemy_turn"]
 [connection signal="move_cursor" from="StateMachine" to="." method="_on_StateMachine_move_cursor"]
 [connection signal="new_menu" from="StateMachine" to="." method="_on_StateMachine_new_menu"]
 [connection signal="option_selected" from="StateMachine" to="." method="_on_StateMachine_option_selected"]
